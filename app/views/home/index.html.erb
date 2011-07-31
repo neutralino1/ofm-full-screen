@@ -1,0 +1,19 @@
+<div id="login-box">
+<%= form_tag '', :id => 'login-form' do %>
+<%= text_field_tag :email, nil, :id => 'email', :class => 'field' %>
+<%= password_field_tag :password, nil, :id => 'password', :class =>
+'field' %>
+<%= submit_tag 'log in', :id => 'login', :class => 'istok fright
+login-button' %>
+<%= submit_tag 'sign up', :id => 'signup', :class => 'istok fleft
+login-button' %>
+<% end %>
+<!--<form action="" id="login-form">
+<input class="field" id="email" name="email" type="text" />
+<input class="field" id="password" name="password" type="password" />
+<input class="istok fright login-button" name="commit" type="submit"
+       value="log in" id="login"/>
+<input class="istok fleft login-button" name="commit" type="submit"
+       value="sign up" id="signup"/>
+</form>-->
+</div>

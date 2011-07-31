@@ -1,0 +1,7 @@
+<% if @tracks.empty? %>
+<p>No results.</p>
+<% else %>
+<!--<div class="fright help"></div>
+<div class="fclear" />-->
+<%= render :partial => 'search/track', :collection => @tracks %>
+<% end %>

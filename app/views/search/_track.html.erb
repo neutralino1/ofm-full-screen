@@ -1,0 +1,24 @@
+<div class="track">
+<div class="fleft">
+  <%= link_to "", "javascript://", :class => "button tiny loading fleft", :id => "#{track.id}-track",
+  :title => "Play music by #{track.artist_string}" %></div>
+<div class="fleft track-info">
+<span class="track-name"><%= track.title %></span><br />
+<span class="artist-name"><%= track.artist_string %></span>
+</div>
+<div class="fright create-button-div">
+<%= link_to '', 'javascript://', :class => 'button large create-page',
+:id => "#{track.id}-create"%>
+<% if track_counter == 0 %>
+<div class="help search-tooltip">
+<div class="arrow-border"></div>
+<div class="arrow"></div>
+Click the + button to create a page from the track.</div>
+<% end %>
+</div>
+<div class="fright">
+<img src="<%= track.picture_absolute_url %>" class="search-thumb"/>
+
+</div>
+<div class="fclear" />
+</div>

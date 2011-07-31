@@ -1,0 +1,22 @@
+<h1 class="istok">Your pages</h1>
+<div id="left-pane" class="pane fleft">
+<% if @pages.empty? %>
+<p>You haven't created any pages so far.<br/>
+Search a track in the right panel.</p>
+<% else %>
+v
+<% end %>
+</div>
+<div class="pane fright">
+<%= form_tag search_path, :id => 'ofm-search-form', :class => 'align-text-right' do %>
+<%= text_field_tag :q, nil, :id => 'query' %></br>
+<%= submit_tag 'search official.fm', :id => 'submit-search' %>
+<% end %>
+<div class="align-text-center hidden" id="search-spinner-div">
+<%= image_tag 'spinner1.gif' %>
+</div>
+<div id="search-results">
+</div>
+<div id="search-player"></div>
+</div>
+<div class="fclear"></div>
