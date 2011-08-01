@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20110730174203) do
     t.string   "twitter"
     t.string   "myspace"
     t.string   "custom"
+    t.string   "website"
     t.boolean  "public"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -12,15 +12,26 @@
 </div>
 <img src="<%= @track.picture_absolute_url %>" class="fright">
 <div class="fclear"></div>
+<hr class="seperator"/>
 <%= form_for(@page) do |f| %>
 <table>
-<tr><td>Facebook page :</td><td><%= f.text_field :facebook %></td></tr>
-<tr><td>Twitter handle :</td><td><%= f.text_field :twitter
+<tr><td class="label">Website</td><td><%= f.text_field :website %></td></tr>
+<tr><td class="label">Facebook page</td><td><%= f.text_field :facebook %></td></tr>
+<tr><td class="label">Twitter handle</td><td><%= f.text_field :twitter
 				     %></td></tr>
-<tr><td>MySpace page :</td><td><%= f.text_field :myspace %></td></tr>
-<tr><td>Custom URL :</td><td><%= f.text_field :custom %></td></tr>
+<tr><td class="label">MySpace
+    page</td><td><%= f.text_field :myspace
+					 %></td></tr>
+</table>
+<hr class="seperator"/>
+<table>
+<tr><td class="label">Custom URL</td><td><%= f.text_field :custom %></td></tr>
 <tr><td></td><td></td></tr>
 </table>
+<hr class="seperator"/>
+<%= f.hidden_field :track_id %>
+<%= f.submit 'Create page', :class => 'blue-text fright', :id => 'create-page-button' %>
 <% end %>
+<div class="fclear"></div>
 </div>
 </div>

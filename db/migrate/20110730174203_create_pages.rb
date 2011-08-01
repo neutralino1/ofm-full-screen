@@ -7,6 +7,7 @@ class CreatePages < ActiveRecord::Migration
       t.string :twitter
       t.string :myspace
       t.string :custom
+      t.string :website
       t.boolean :public
       t.timestamps
     end

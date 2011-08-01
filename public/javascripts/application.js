@@ -55,12 +55,12 @@ var Start = {
 	this.searchForm = $('form#ofm-search-form');
 	this.spinnerDiv = $('div#search-spinner-div');
 	this.searchForm.submit(function(event){
+	    event.preventDefault();
 	    this.toggleVisibility(this.spinnerDiv);
 	    $.get('/search', this.searchForm.serialize(), function(data){
 		this.searchResults.html(data);
 		this.setupAfterSearch();
 	    }.bind(this));
-	    event.preventDefault();
 	}.bind(this));
     },
 
@@ -71,19 +71,33 @@ var Start = {
 	this.searchResults.hover(
 	    function(){ this.searchToolTip.fadeIn(1000); }.bind(this),
 	    function(){ this.searchToolTip.fadeOut(1000); }.bind(this));
-	$('a.button.create-page').click(function(){
-	    var track_id = parseInt(this.id);
+	$('a.button.create-page').click(function(event){
+	    var track_id = parseInt(event.target.id);
 	    $.get('/pages/new', {'track_id':track_id}, function(data){
-		$('div#left-pane').html(data);
-		SearchPlayer.init();
-	    });
-	});
+		this.leftPane.html(data);
+		this.setupNewPage();
+	    }.bind(this));
+	}.bind(this));
 	SearchPlayer.init();
+    },
+
+    setupNewPage:function(){
+	SearchPlayer.init();
+	this.pageForm = $('form#new_page');
+	console.log(this.pageForm);
+	this.pageForm.submit(function(event){
+	    console.log('dd');
+	    event.preventDefault();
+	    $.post('/pages', $(event.target).serialize(), function(data){
+		this.leftPane.html(data);
+	    }.bind(this));
+	}.bind(this));
     },
 
     setupAfterLogin:function(){
 	this.setupLogoutLink();
 	this.setupSearch();
+	this.leftPane = $('div#left-pane');
     },
 
     toggleVisibility:function(item){
@@ -127,16 +141,16 @@ var SearchPlayer = {
 	if (!this.playButtons || this.alreadyInit) return;
 //	this.alreadyInit = true;
 
-	this.playButtons.click(function() {
-	    var button_track_id = parseInt(this.id);
-	    var current_track_id = SearchPlayer.player.get_current_track_id();
+	this.playButtons.click(function(event) {
+	    var button_track_id = parseInt(event.target.id);
+	    var current_track_id = this.player.get_current_track_id();
 	    if (current_track_id != button_track_id) {
-		SearchPlayer.reset_played_track_buttons();
-		SearchPlayer.player.play_track(button_track_id);
+		this.reset_played_track_buttons();
+		this.player.play_track(button_track_id);
 	    } else {
-		SearchPlayer.player.is_playing() ? SearchPlayer.player.pause() : SearchPlayer.player.play_track(button_track_id);
+		this.player.is_playing() ? this.player.pause() : this.player.play_track(button_track_id);
       }
-	});
+	}.bind(this));
     },
 
     sync_play_buttons_of_track: function(track_id) {
