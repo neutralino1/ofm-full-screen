@@ -89,6 +89,10 @@ div#main-content {
     margin: 0px auto;
 }
 
+div#main-content a{
+    color:#313233;
+}
+
 div#login-box {
     width:300px;
     margin:250px auto;
@@ -186,7 +190,7 @@ div.track-info {
     width:70%;
 }
 
-img.search-thumb {
+img.small-thumb{
     width:50px;
     display:block;
 }
@@ -258,11 +262,14 @@ div.empty-tooltip div.arrow-border {
   right:-20px;
 }
 
-div.new-page div.track-summary {
+div.clear-bkg {
     border: 1px solid #D1D2D3;
     background-color:#F9F0FA;
-    margin-top:20px;
     padding:5px;
+}
+
+div.new-page div.track-summary {
+    margin-top:20px;
 }
 
 div.track-summary div.track-info {
@@ -283,8 +290,15 @@ hr.seperator {
     border:0px;
 }
 
-input#create-page-button {
-//    margin-
+div.page-summary {
+    margin-top:20px;
+    padding-bottom:0px;
+}
+
+div.manage-links {
+    font-size:12px;
+    position:aboslute;
+    color:#D1D2D3;
 }
 
 .blue-text {

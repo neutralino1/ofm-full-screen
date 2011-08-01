@@ -1,103 +1,124 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
-var Start = {
+var OFMFS = {
 
     init: function(){
 	this.mainContent = $('div#main-content');
 	this.logoutLink = $('a#logout');
-	this.setupLoginForm();
-	this.setupAfterLogin();
+	this.logoutLink.click(this.logOut);
+	if (this.loggedIn) this.showHome();
+	else this.showLogin();
     },
 
-    setupLoginForm:function(){
-	var loginForm= $('form#login-form');
-	var emailField = $('input#email');
-	var passField = $('input#password');
-	var logInButton = $('input#login');
-	var signUpButton = $('input#signup');
-	logInButton.click(function(event){
-	    $.post('/session', loginForm.serialize(), 
-		   function(data){
-		       this.mainContent.html(data);
-		       this.toggleVisibility(this.logoutLink);
-		       this.setupAfterLogin();
-		   }.bind(this));
-	    event.preventDefault();
-	}.bind(this));
-	signUpButton.click(function(event){
-	    $.post('/users', loginForm.serialize(), 
-		   function(data){
-		       this.mainContent.html(data);
-		   }.bind(this));
-	    event.preventDefault();
-	}.bind(this));
-    },
-    
-    setupLogoutLink:function(){
-	$('a#logout').click(function(event){
-	    $.ajax({
-		type:'DELETE',
-		url:'/session',
-		success:function(data){
-		    this.toggleVisibility(this.logoutLink);
-		    this.toggleLogoutLink();
-		    this.mainContent.html(data);
-		    this.setupLoginForm();
-		}.bind(this)
-	    });
-	    event.preventDefault();
-	}.bind(this));
+    showLogin:function(data){
+	if(data) this.mainContent.html(data);
+	this.showLogoutLink(false);
+	this.loginForm = $('form#login-form');
+	$('input#login').click(this.logIn);
+	$('input#signup').click(this.signUp);
     },
 
-    setupSearch:function(){
+    logIn:function(event){
+	event.preventDefault();
+	$.post('/session', this.loginForm.serialize(), this.showHome);
+    },
+
+    showHome:function(data){
+	if(data) this.mainContent.html(data);
+	this.showLogoutLink();
+	this.showSearch();
+	this.showPageList();
+    },
+
+    signUp:function(event){
+	event.preventDefault();
+	$.post('/users', this.loginForm.serialize(), this.showHome);
+    },
+
+    showLogoutLink:function(show){
+	show = (show == null) ? true : show;
+	if(show) this.logoutLink.removeClass('hidden');
+	else this.logoutLink.addClass('hidden');
+    },
+
+    logOut:function(event){
+	event.preventDefault();
+	$.ajax({
+	    type:'DELETE',
+	    url:'/session',
+	    success:this.showLogin
+	});
+    },
+
+    showSearch:function(){
 	this.searchResults = $('div#search-results');
 	this.searchForm = $('form#ofm-search-form');
 	this.spinnerDiv = $('div#search-spinner-div');
-	this.searchForm.submit(function(event){
-	    event.preventDefault();
-	    this.toggleVisibility(this.spinnerDiv);
-	    $.get('/search', this.searchForm.serialize(), function(data){
-		this.searchResults.html(data);
-		this.setupAfterSearch();
-	    }.bind(this));
-	}.bind(this));
+	this.searchForm.submit(this.search);
     },
 
-    setupAfterSearch:function(){
+    search:function(event){
+	event.preventDefault();
 	this.toggleVisibility(this.spinnerDiv);
+	$.get('/search', this.searchForm.serialize(), this.showSearchResults);
+    },
+
+    showSearchResults:function(data){
+	this.toggleVisibility(this.spinnerDiv);
+	if (data) this.searchResults.html(data);
 	this.searchToolTip = $('div.help.search-tooltip');
 	this.searchToolTip.fadeOut(10000);
 	this.searchResults.hover(
 	    function(){ this.searchToolTip.fadeIn(1000); }.bind(this),
 	    function(){ this.searchToolTip.fadeOut(1000); }.bind(this));
-	$('a.button.create-page').click(function(event){
-	    var track_id = parseInt(event.target.id);
-	    $.get('/pages/new', {'track_id':track_id}, function(data){
-		this.leftPane.html(data);
-		this.setupNewPage();
-	    }.bind(this));
-	}.bind(this));
-	SearchPlayer.init();
+	$('a.button.create-page').click(this.createNewPage);
+	Player.init();
     },
 
-    setupNewPage:function(){
-	SearchPlayer.init();
+    createNewPage:function(event){
+	var track_id = parseInt(event.target.id);
+	$.get('/pages/new', {'track_id':track_id}, this.setupNewPage);
+    },
+
+    setupNewPage:function(data){
+	if (data) this.leftPanel.html(data);
+	Player.init();
 	this.pageForm = $('form#new_page');
-	console.log(this.pageForm);
-	this.pageForm.submit(function(event){
-	    console.log('dd');
-	    event.preventDefault();
-	    $.post('/pages', $(event.target).serialize(), function(data){
-		this.leftPane.html(data);
-	    }.bind(this));
+	this.pageForm.submit(this.submitNewPage);
+    },
+
+    submitNewPage:function(event){
+	event.preventDefault();
+	$.post('/pages', $(event.target).serialize(), this.setupPageList);
+    },
+
+    showPageList:function(data){
+	this.leftPanel = $('div#left-pane');
+	if (data) this.leftPanel.html(data);
+	Player.init();
+	$('div.page-summary').each(function(){
+	    $(this).hover(function(){
+		$(this).find('div.manage-links').removeClass('hidden');
+	    },
+		       function(){
+			   $(this).find('div.manage-links').addClass('hidden');
+		       });
+	});
+	$('a.page-delete-link').each(function(i, l){
+	    $(l).click(this.deletePage);
 	}.bind(this));
     },
 
-    setupAfterLogin:function(){
-	this.setupLogoutLink();
-	this.setupSearch();
-	this.leftPane = $('div#left-pane');
+    deletePage:function(event){
+	event.preventDefault();
+	$.ajax({
+	    type:'DELETE',
+	    url:'/pages/' + parseInt(event.target.id),
+	    success:function(){
+		$(event.target).closest('div.page-summary').animate({height: 0, opacity: 0}, 'slow', 
+								    function(){$(this).remove();});
+	    }});
     },
 
     toggleVisibility:function(item){
@@ -107,7 +128,7 @@ var Start = {
 };
 
 
-var SearchPlayer = {
+var Player = {
     init:function(){
 	this.alreadyInit = false;
 	this.playButtons = $('a.button.loading');
@@ -189,5 +210,5 @@ var SearchPlayer = {
 
 
 $(document).ready(function(){
-    Start.init();
+    OFMFS.init();
 });

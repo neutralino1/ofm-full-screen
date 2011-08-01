@@ -21,4 +21,8 @@ class PagesController < ApplicationController
     end
   end
 
+  def destroy
+    render :text => ''
+  end
+  
 end

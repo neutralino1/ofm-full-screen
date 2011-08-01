@@ -1,0 +1,22 @@
+<div class="clear-bkg page-summary">
+<div class="fleft">
+<% track = page.track %>
+  <%= link_to "", "javascript://", :class => "button large loading
+  fleft #{track.id}-track", :id => "#{track.id}-track",
+  :title => "Play music by #{track.artist_string}" %>
+</div>
+<div class="fleft track-info">
+<div class="track-name"><%= track.title %></div>
+<div class="artist-name"><%= track.artist_string %></div>
+</div>
+<img src="<%= track.picture_absolute_url %>" class="fright small-thumb">
+<div class="fclear"></div>
+URL : <%= link_to page.url, page.url, :target => 'new' %>
+<div class="fright manage-links hidden">
+<%= link_to 'edit', 'javascript://', :id => "#{page.id}-page-edit",
+					     :class => 'page-edit-link' %> | <%= link_to 'delete',
+					     'javascript://', :id =>
+					     "#{page.id}-page-delete",
+					     :class => 'page-delete-link'
+					     %></div>
+</div>

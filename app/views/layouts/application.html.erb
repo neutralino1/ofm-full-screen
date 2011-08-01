@@ -5,6 +5,9 @@
   <%= javascript_include_tag "jquery-1.6.2.min" %>
   <%= javascript_include_tag "player_api" %>
   <%= javascript_include_tag "application" %>
+  <script type="text/javascript">
+    OFMFS.loggedIn = <%= current_user ? 'true' : 'false' %>
+  </script>
   <%= stylesheet_link_tag :all %>
   <%= csrf_meta_tag %>
 </head>

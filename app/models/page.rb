@@ -13,7 +13,7 @@ class Page < ActiveRecord::Base
   }
 
   after_initialize :set_defaults
-  before_save :clear_defaults
+  before_save :clear_defaults, :strip_slash
 
   def clear_defaults
     DEFAULT.each do |k,v|
@@ -29,4 +29,16 @@ class Page < ActiveRecord::Base
     end
   end
 
+  def strip_slash
+    self.custom = self.custom[1..-1] if self.custom[0] == '/'
+  end
+
+  def track
+    @track = @track || OfmFullScreen.ofm.track(track_id)
+  end
+
+  def url
+    path = custom ? custom : "pages/#{id}"
+    "http://ofm-fs.heroku.com/#{path}"
+  end
 end
