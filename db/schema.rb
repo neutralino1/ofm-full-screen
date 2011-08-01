@@ -15,10 +15,16 @@ ActiveRecord::Schema.define(:version => 20110730174203) do
   create_table "pages", :force => true do |t|
     t.integer  "user_id"
     t.integer  "track_id",   :null => false
+    t.string   "facebook"
+    t.string   "twitter"
+    t.string   "myspace"
+    t.string   "custom"
+    t.boolean  "public"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "pages", ["custom"], :name => "index_pages_on_custom", :unique => true
   add_index "pages", ["user_id"], :name => "index_pages_on_user_id"
 
   create_table "users", :force => true do |t|

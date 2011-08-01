@@ -1,8 +1,11 @@
 <h1 class="istok">Your pages</h1>
 <div id="left-pane" class="pane fleft">
 <% if @pages.empty? %>
-<p>You haven't created any pages so far.<br/>
-Search a track in the right panel.</p>
+<div class="help fright empty-tooltip">
+<div class="arrow-border"></div>
+<div class="arrow"></div>
+You haven't created any pages so far.<br/>
+Search a track in the right panel.</div>
 <% else %>
 v
 <% end %>

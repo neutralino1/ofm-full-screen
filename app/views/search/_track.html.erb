@@ -1,10 +1,11 @@
 <div class="track">
 <div class="fleft">
-  <%= link_to "", "javascript://", :class => "button tiny loading fleft", :id => "#{track.id}-track",
+  <%= link_to "", "javascript://", :class => "button tiny loading
+  fleft #{track.id}-track", :id => "#{track.id}-track",
   :title => "Play music by #{track.artist_string}" %></div>
 <div class="fleft track-info">
-<span class="track-name"><%= track.title %></span><br />
-<span class="artist-name"><%= track.artist_string %></span>
+<div class="track-name"><%= track.title %></div>
+<div class="artist-name"><%= track.artist_string %></div>
 </div>
 <div class="fright create-button-div">
 <%= link_to '', 'javascript://', :class => 'button large create-page',

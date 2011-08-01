@@ -73,9 +73,9 @@ var Start = {
 	    function(){ this.searchToolTip.fadeOut(1000); }.bind(this));
 	$('a.button.create-page').click(function(){
 	    var track_id = parseInt(this.id);
-	    console.log(track_id);
 	    $.get('/pages/new', {'track_id':track_id}, function(data){
 		$('div#left-pane').html(data);
+		SearchPlayer.init();
 	    });
 	});
 	SearchPlayer.init();
@@ -97,16 +97,20 @@ var SearchPlayer = {
     init:function(){
 	this.alreadyInit = false;
 	this.playButtons = $('a.button.loading');
-	this.player = OfficialFM.Player.create({
-            container_id: "search-player",
-            aspect: 'small',
-	    type: 'track',
-	    id: parseInt(this.playButtons.first().attr('id')),
-            onReady: function() { this.post_init(); }.bind(this),
-            onPlay: function(track_id) { this.sync_play_buttons_of_track(track_id); }.bind(this),
-            onPause: function() { this.sync_current_track_pause_buttons(); }.bind(this),
-            onTracklistEnd: function() { this.reset_played_track_buttons(); }.bind(this)
-        });
+	if (!this.player){
+	    this.player = OfficialFM.Player.create({
+		container_id: "search-player",
+		aspect: 'small',
+		type: 'track',
+		id: parseInt(this.playButtons.first().attr('id')),
+		onReady: function() { this.post_init(); }.bind(this),
+		onPlay: function(track_id) { this.sync_play_buttons_of_track(track_id); }.bind(this),
+		onPause: function() { this.sync_current_track_pause_buttons(); }.bind(this),
+		onTracklistEnd: function() { this.reset_played_track_buttons(); }.bind(this)
+            });
+	}else{
+	    this.post_init();
+	}
     },
 
     post_init: function() {
@@ -117,12 +121,6 @@ var SearchPlayer = {
     display_play_buttons: function() {
 	this.playButtons.removeClass('loading');
 	this.playButtons.addClass('play');
-//	this.playButtons.toggleClass('hidden');
-//	$('a.button.loading').each(function(button){
-//	    console.log(button);
-//	    SearchPlayer.cleanClass(button);
-//	    button.addClass("play");
-//	});
     },
 
     manage_track_plays: function() {
@@ -142,27 +140,29 @@ var SearchPlayer = {
     },
 
     sync_play_buttons_of_track: function(track_id) {
-	var button = $("a#" + track_id + "-track");
-	this.cleanClass(button);
-	button.addClass("pause");
-	button.set("html", "");
+	$("a." + track_id + "-track").each(function(i, b){
+	    this.cleanClass($(b));
+	    $(b).addClass("pause");
+	    $(b).html("");
+	}.bind(this));
     },
 
     sync_current_track_pause_buttons: function() {
 	var track_id = this.player.get_current_track_id();
-	var button = $("a#" + track_id + "-track");
-	this.cleanClass(button);
-	button.addClass("paused");
-	button.html("");
+	$("a." + track_id + "-track").each(function(i, b){
+	    this.cleanClass($(b));
+	    $(b).addClass("paused");
+	    $(b).html("");
+	}.bind(this));
     },
     
     reset_played_track_buttons: function() {
 	track_id = this.player.get_current_track_id();
-	
-	var button = $("a#" + track_id + "-track");
-	this.cleanClass(button);
-	button.addClass("play");
-	button.html("");
+	$("a." + track_id + "-track").each(function(i, b){
+	    this.cleanClass($(b));
+	    $(b).addClass("play");
+	    $(b).html("");
+	}.bind(this));
   },
 
     cleanClass: function(el){

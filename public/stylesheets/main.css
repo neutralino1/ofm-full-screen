@@ -108,6 +108,7 @@ div.pane {
     width:459px;
     padding:20px 10px 20px 10px;
     margin-bottom:30px;
+    position:relative;
 }
 
 div#left-pane {
@@ -128,7 +129,7 @@ div#search-results div.track {
     border-bottom:1px solid #D1D2D3;
 }
 
-div#search-results div.track span.track-name{
+div.track-name{
     font-size:20px;
     font-weight:bold;
 }
@@ -153,15 +154,22 @@ a.button.large {
     height:40px;
 }
 
-a.button.loading { background-position: -448px -80px; }
-a.button.play { background-position: -336px -80px; }
-a.button.play:hover { background-position: -336px -96px; }
-a.button.paused { background-position: -352px -80px; } 
-a.button.paused:hover { background-position: -352px -96px; }
-a.button.pause { background-position: -368px -80px; } 
-a.button.pause:hover { background-position: -368px  -96px; }
-a.button.create-page { background-position: -200px 0; }
-a.button.create-page:hover { background-position: -200px -40px; }
+a.button.loading.tiny { background-position: -448px -80px; }
+a.button.play.tiny { background-position: -336px -80px; }
+a.button.play.tiny:hover { background-position: -336px -96px; }
+a.button.paused.tiny { background-position: -352px -80px; } 
+a.button.paused.tiny:hover { background-position: -352px -96px; }
+a.button.pause.tiny { background-position: -368px -80px; } 
+a.button.pause.tiny:hover { background-position: -368px  -96px; }
+a.button.create-page.large { background-position: -200px 0; }
+a.button.create-page.large:hover { background-position: -200px -40px; }
+a.button.loading.large { background-position: -480px 0; }
+a.button.play.large { background-position: 0px 0px; }
+a.button.play.large:hover { background-position: 0px -40px; }
+a.button.pause.large { background-position: -80px 0px; }
+a.button.pause.large:hover { background-position: -80px -40px; }
+a.button.paused.large { background-position: -40px 0px; }
+a.button.paused.large:hover { background-position: -40px -40px; }
 
 div.create-button-div {
     padding-top:5px;
@@ -221,6 +229,46 @@ div.search-tooltip div.arrow-border {
   top:0px;
   left:-21px;
 }
+
+div.empty-tooltip {
+    position:absolute;
+    right:20px;
+}
+
+div.empty-tooltip div.arrow {
+    content: " ";
+    border-color: transparent transparent transparent #FAF7EB;
+    border-style: solid;
+    border-width: 10px;
+    height:0;
+    width:0;
+    position:absolute;
+    top:6px;
+    right:-19px;
+}
+
+div.empty-tooltip div.arrow-border {
+  border-color: transparent transparent transparent #F0E7C2;
+  border-style: solid;
+  border-width: 10px;
+  height:0;
+  width:0;
+  position:absolute;
+  top:6px;
+  right:-20px;
+}
+
+div.new-page div.track-summary {
+    border: 1px solid #D1D2D3;
+    background-color:#F9F0FA;
+    margin-top:20px;
+    padding:5px;
+}
+
+div.track-summary div.track-info {
+    width:63%;
+}
+
 
 .fright {
     float:right;

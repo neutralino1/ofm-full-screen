@@ -6,7 +6,9 @@ class PagesController < ApplicationController
   end
 
   def new
-    render :text => "Creating page from #{params[:track_id]}"
+    @track = OfmFullScreen.ofm.track(params[:track_id])
+    @page = Page.new
+    render 'new', :layout => false
   end
 
 end
