@@ -8,7 +8,7 @@ class PagesController < ApplicationController
   def new
     @track = OfmFullScreen.ofm.track(params[:track_id])
     @page = Page.new(:track_id => @track.id)
-    render 'new', :layout => false
+    render 'pages/show', :layout => false
   end
 
   def create
@@ -22,6 +22,8 @@ class PagesController < ApplicationController
   end
 
   def destroy
+    page = Page.find(params[:id])
+    page.destroy
     render :text => ''
   end
   

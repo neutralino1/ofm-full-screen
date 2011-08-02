@@ -8,7 +8,7 @@ You haven't created any pages so far.<br/>
 Search a track in the right panel.</div>
 <% else %>
 <p>You have created <%= pluralize(@pages.count, "page") %></p>
-<%= render :partial => 'page', :collection => @pages %>
+<%= render :partial => 'pages/page', :collection => @pages %>
 <% end %>
 </div>
 <div class="pane fright">

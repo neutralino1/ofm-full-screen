@@ -8,8 +8,8 @@
 <div class="artist-name"><%= track.artist_string %></div>
 </div>
 <div class="fright create-button-div">
-<%= link_to '', 'javascript://', :class => 'button large create-page',
-:id => "#{track.id}-create"%>
+<%= link_to '', new_page_path + "?track_id=#{track.id}", :class => 'button large create-page',
+:id => "#{track.id}-create", :target => 'new' %>
 <% if track_counter == 0 %>
 <div class="help search-tooltip">
 <div class="arrow-border"></div>

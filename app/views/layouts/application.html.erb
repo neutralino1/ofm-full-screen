@@ -4,11 +4,11 @@
   <title>OfmFullScreen</title>
   <%= javascript_include_tag "jquery-1.6.2.min" %>
   <%= javascript_include_tag "player_api" %>
-  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag 'application', 'main', 'player' %>
   <script type="text/javascript">
     OFMFS.loggedIn = <%= current_user ? 'true' : 'false' %>
   </script>
-  <%= stylesheet_link_tag :all %>
+  <%= stylesheet_link_tag 'shared', 'main' %>
   <%= csrf_meta_tag %>
 </head>
 <body>
@@ -19,5 +19,6 @@
 </div>
 </div>
 <%= render 'layouts/footer' %>
+<div id="pending" class="hidden"><%= image_tag 'spinner1.gif' %></div>
 </body>
 </html>
