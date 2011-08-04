@@ -1,5 +1,8 @@
 body {
     background-color:#000000;
+    background-repeat:no-repeat;
+    background-size:100%;
+    
     color:#ffffff;
     padding:30px;
 }
@@ -16,4 +19,31 @@ div#player {
     position:fixed;
     bottom:30px;
     left:30px;
+}
+
+iframe#upload_target {
+    width:0;
+    height:0;
+    border:0px solid #fff;
+}
+
+div#upload {
+    position:fixed;
+}
+
+input#upload {
+    border:0px;
+    background:transparent;
+    width:40px;
+    height:40px;
+    position:fixed;
+    top:0;
+    left:0;
+    background-position: -200px 0;
+    background-image:url(/images/sprite.png);
+    padding-left:-20px;
+    padding-top:-20px;
+}
+input#upload:hover { 
+    background-position: -200px -40px; 
 }

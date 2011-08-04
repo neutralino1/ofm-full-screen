@@ -250,18 +250,3 @@ div.manage-links {
     position:aboslute;
     color:#D1D2D3;
 }
-
-div#pending{
-    background-color:#EFEFE9;
-    margin-left:auto;
-    margin-right:auto;
-    opacity:0.5;
-    position:fixed;
-    top:83px;
-}
-
-div#pending img{
-    position:fixed;
-    padding-left:-16px;
-    padding-top:-16px;
-}

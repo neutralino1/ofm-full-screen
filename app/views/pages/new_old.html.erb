@@ -1,0 +1,37 @@
+<div class="new-page">
+<h2 class="istok">Create a new page</h2>
+<div class="track-summary clear-bkg">
+<div class="fleft">
+  <%= link_to "", "javascript://", :class => "button large loading
+  fleft #{@track.id}-track", :id => "#{@track.id}-track",
+  :title => "Play music by #{@track.artist_string}" %>
+</div>
+<div class="fleft track-info">
+<div class="track-name"><%= @track.title %></div>
+<div class="artist-name"><%= @track.artist_string %></div>
+</div>
+<img src="<%= @track.picture_absolute_url %>" class="fright">
+<div class="fclear"></div>
+<hr class="seperator"/>
+<%= form_for(@page) do |f| %>
+<table>
+<tr><td class="label">Website</td><td><%= f.text_field :website %></td></tr>
+<tr><td class="label">Facebook page</td><td><%= f.text_field :facebook %></td></tr>
+<tr><td class="label">Twitter handle</td><td><%= f.text_field :twitter
+				     %></td></tr>
+<tr><td class="label">MySpace
+    page</td><td><%= f.text_field :myspace
+					 %></td></tr>
+</table>
+<hr class="seperator"/>
+<table>
+<tr><td class="label">Custom URL</td><td><%= f.text_field :custom %></td></tr>
+<tr><td></td><td></td></tr>
+</table>
+<hr class="seperator"/>
+<%= f.hidden_field :track_id %>
+<%= f.submit 'Create page', :class => 'blue-text fright', :id => 'create-page-button' %>
+<% end %>
+<div class="fclear"></div>
+</div>
+</div>

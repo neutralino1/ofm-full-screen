@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
 
   def search
     @tracks = OfmFullScreen.ofm.tracks(params[:q])
-    raise @tracks.inspect
     render 'search/search', :layout => false
   end
 

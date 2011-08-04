@@ -13,6 +13,9 @@ OfmFullScreen::Application.routes.draw do
 
   match 'search' => 'application#search'
 
+  match 'upload' => 'pictures#upload'
+  match 'upload_form' => 'pictures#upload_form'
+
   get "home/index"
 
   # The priority is based upon order of creation:

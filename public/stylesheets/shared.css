@@ -92,3 +92,19 @@ div#search-player {
     position:absolute;
     top:-1000px;
 }
+
+
+div#pending{
+    background-color:#EFEFE9;
+    margin-left:auto;
+    margin-right:auto;
+    opacity:0.5;
+    position:fixed;
+    top:83px;
+}
+
+div#pending img{
+    position:fixed;
+    padding-left:-16px;
+    padding-top:-16px;
+}

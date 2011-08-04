@@ -8,7 +8,7 @@ class PagesController < ApplicationController
   def new
     @track = OfmFullScreen.ofm.track(params[:track_id])
     @page = Page.new(:track_id => @track.id)
-    render 'pages/show', :layout => false
+    render 'new', :layout => false
   end
 
   def create
