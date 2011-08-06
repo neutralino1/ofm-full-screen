@@ -71,6 +71,11 @@ a.button.large {
     height:40px;
 }
 
+a.button.medium {
+    width:30px;
+    height:30px;
+}
+
 a.button.loading.tiny { background-position: -448px -80px; }
 a.button.play.tiny { background-position: -336px -80px; }
 a.button.play.tiny:hover { background-position: -336px -96px; }
@@ -87,7 +92,15 @@ a.button.pause.large { background-position: -80px 0px; }
 a.button.pause.large:hover { background-position: -80px -40px; }
 a.button.paused.large { background-position: -40px 0px; }
 a.button.paused.large:hover { background-position: -40px -40px; }
-
+a.button.facebook  { background-position: -340px 0; } 
+a.button.facebook:hover { background-position: -340px -30px; }
+a.button.twitter   { background-position: -370px 0; } 
+a.button.twitter:hover  { background-position: -370px -30px; }
+a.button.myspace   { background-position: -400px 0; } 
+a.button.myspace:hover  { background-position: -400px -30px; }
+a.button.website {
+    background-image:url(/images/website.png);
+}
 div#search-player {
     position:absolute;
     top:-1000px;
@@ -107,4 +120,13 @@ div#pending img{
     position:fixed;
     padding-left:-16px;
     padding-top:-16px;
+}
+
+div.help {
+    font-size:12px;
+    background-color:#FAF7EB;
+    border:1px solid #F0E7C2;
+    padding:5px;
+//    margin-top:0;
+    line-height:18px;
 }

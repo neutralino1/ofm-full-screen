@@ -16,16 +16,35 @@
 
 <h1 class="istok"><%= @track.title %></h1>
 <h2 class="istok"><%= @track.artist_string %></h2>
-<div id="player">
+<div id="player" class="fleft">
   <%= link_to "", "javascript://", :class => "button large loading
   fleft #{@track.id}-track", :id => "#{@track.id}-track",
   :title => "Play music by #{@track.artist_string}" %>
 </div>
+<%= form_for(@page) do |f| %>
+<div id="social" class="fright">
+  <div id="edit-links" class="help">
+<%= f.text_field :facebook %><br/>
+<%= f.text_field :twitter %><br/>
+<%= f.text_field :website %><br/>
+<%= f.text_field :myspace %>
+    <div class="arrow-border"></div>
+    <div class="arrow"></div>
+  </div>
+  <%= link_to "", "javascript://", :class => "button medium myspace
+  fright faded", :id => "myspace-btn" %>
+  <%= link_to "", "javascript://", :class => "button medium website
+  fright faded", :id => "website-btn" %>
+  <%= link_to "", "javascript://", :class => "button medium twitter
+  fright faded", :id => "twitter-btn" %>
+  <%= link_to "", "javascript://", :class => "button medium facebook
+  fright faded", :id => "facebook-btn" %>
+</div>
+<% end %>
 <input type="button" id="upload" />
 <div id="search-player"></div>
 <div id="pending" class="hidden"><%= image_tag 'spinner1.gif' %></div>
-<%= form_for(@page) do |f| %>
-<% end %>
+<%= hidden_field_tag 'page[token]' %>
 <iframe id="upload_target" name="upload_target"
 	src="/upload_form?track_id=<%= @track.id %>"></iframe>
 </body>

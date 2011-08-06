@@ -145,14 +145,6 @@ img.small-thumb{
     display:block;
 }
 
-div.help {
-    font-size:12px;
-    background-color:#FAF7EB;
-    border:1px solid #F0E7C2;
-    padding:5px;
-//    margin-top:0;
-    line-height:18px;
-}
 
 div.search-tooltip {
     width:150px;

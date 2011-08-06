@@ -5,7 +5,6 @@
 <body>
 <%= form_tag '/upload', :multipart => true, :target =>
 'upload_target', :id => 'upload_form' do %>
-<%= hidden_field :picture, :track_id, :value => @track_id %>
 <%= file_field :picture, :file %>
 <% end %>
 <script language="javascript" type="text/javascript">
