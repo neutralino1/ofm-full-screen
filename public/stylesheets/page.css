@@ -7,7 +7,7 @@ body {
     padding:30px;
 }
 
-input {
+input[type='text'] {
     font-size:16px;
     padding:2px;
     border:1px solid #D1D2D3;
@@ -59,8 +59,39 @@ input#upload {
     left:0;
     background-position: -200px 0;
     background-image:url(/images/sprite.png);
-    padding-left:-20px;
-    padding-top:-20px;
+    margin-left:-20px;
+    margin-top:-20px;
+}
+
+div#upload-tooltip {
+    position:fixed;
+    color:#313233;
+    width:185px;
+    margin-left:-95px;
+    margin-top:60px;
+}
+
+div#upload-tooltip div.arrow{
+    content: " ";
+    border-color: transparent transparent #FAF7EB transparent;
+    border-style: solid;
+    border-width: 20px;
+    height:0;
+    width:0;
+    position:absolute;
+    left:75px;
+    top:-40px;
+}
+
+div#upload-tooltip div.arrow-border {
+  border-color: transparent transparent #F0E7C2 transparent;
+  border-style: solid;
+  border-width: 20px;
+  height:0;
+  width:0;
+  position:absolute;
+  left:75px;
+  top:-41px;
 }
 
 div#edit-links {
@@ -92,6 +123,12 @@ div#edit-links div.arrow-border {
   position:absolute;
   right:46px;
   bottom:-41px;
+}
+
+input#page_submit {
+    position:fixed;
+    top:30px;
+    right:30px;
 }
 
 .faded {

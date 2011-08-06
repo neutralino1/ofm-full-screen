@@ -116,6 +116,8 @@ OFMFS.Main = {
 	    success:function(){
 		$(event.target).closest('div.page-summary').animate({height: 0, opacity: 0}, 'slow', 
 								    function(){$(this).remove();});
+		count = $('span#page_count');
+		count.html(parseInt(count.html) - 1);
 	    }});
     },
 

@@ -1,4 +1,5 @@
 require 'logger'
+require 'fileutils'
 
 class Page < ActiveRecord::Base
   belongs_to :user
@@ -12,14 +13,19 @@ class Page < ActiveRecord::Base
     :website => 'http://www.'
   }
 
-  after_initialize :set_defaults
+  attr_accessor :token
+
   before_save :clear_defaults, :strip_slash
+  after_save :rename_image
+
+  def rename_image
+    FileUtils.mv("public/backgrounds/#{token}.jpg", "public/backgrounds/#{id}.jpg")
+  end
 
   def clear_defaults
     DEFAULT.each do |k,v|
       self[k] = nil if self[k] == v
     end
-    logger.info self.inspect
   end
 
   def set_defaults
@@ -30,7 +36,7 @@ class Page < ActiveRecord::Base
   end
 
   def strip_slash
-    self.custom = self.custom[1..-1] if self.custom[0] == '/'
+    self.custom = self.custom[1..-1] if self.custom && self.custom[0] == '/'
   end
 
   def track
@@ -41,4 +47,10 @@ class Page < ActiveRecord::Base
     path = custom ? custom : "pages/#{id}"
     "http://ofm-fs.heroku.com/#{path}"
   end
+
+  def twitter_link
+    "http://twitter.com/#{twitter[1..-1]}"
+  end
+
+  
 end

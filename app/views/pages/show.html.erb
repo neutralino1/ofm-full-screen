@@ -4,22 +4,32 @@
   <title><%= @track.artist_string %> - <%= @track.title %></title>
   <%= javascript_include_tag "jquery-1.6.2.min" %>
   <%= javascript_include_tag "player_api" %>
-  <%= javascript_include_tag 'application', 'page', 'player' %>
+  <%= javascript_include_tag 'swfupload', 'jquery.swfupload' %>
+  <%= javascript_include_tag 'application', 'shared', 'page', 'player' %>
   <script type="text/javascript">
     OFMFS.loggedIn = <%= current_user ? 'true' : 'false' %>
   </script>
   <%= stylesheet_link_tag 'shared', 'page' %>
   <%= csrf_meta_tag %>
 </head>
-<body>
+<body style="background-image:url('/backgrounds/<%= @page.id %>.jpg');">
 <h1 class="istok"><%= @track.title %></h1>
 <h2 class="istok"><%= @track.artist_string %></h2>
-<div id="player">
+<div id="player" class="fleft">
   <%= link_to "", "javascript://", :class => "button large loading
   fleft #{@track.id}-track", :id => "#{@track.id}-track",
   :title => "Play music by #{@track.artist_string}" %>
 </div>
+<div id="social" class="fright">
+  <%= link_to("", @page.myspace, :class => "button medium myspace
+  fright", :id => "myspace-btn", :target => 'new') if @page.myspace %>
+  <%= link_to("", @page.website, :class => "button medium website
+  fright", :id => "website-btn", :target => 'new') if @page.website %>
+  <%= link_to("", @page.twitter_link, :class => "button medium twitter
+  fright", :id => "twitter-btn", :target => 'new') if @page.twitter %>
+  <%= link_to("", @page.facebook, :class => "button medium facebook
+  fright", :id => "facebook-btn", :target => 'new') if @page.facebook %>
+</div>
 <div id="search-player"></div>
-<div id="pending" class="hidden"><%= image_tag 'spinner1.gif' %></div>
 </body>
 </html>

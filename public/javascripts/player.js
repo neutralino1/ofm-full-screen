@@ -1,5 +1,5 @@
 OFMFS.Player = {
-    init:function(){
+    init:function(autoplay){
 	this.alreadyInit = false;
 	this.playButtons = $('a.button.loading');
 	if (!this.player){
@@ -8,7 +8,10 @@ OFMFS.Player = {
 		aspect: 'small',
 		type: 'track',
 		id: parseInt(this.playButtons.first().attr('id')),
-		onReady: function() { this.post_init(); }.bind(this),
+		onReady: function() { 
+		    this.post_init(); 
+		    if (autoplay) this.player.play();
+		}.bind(this),
 		onPlay: function(track_id) { this.sync_play_buttons_of_track(track_id); }.bind(this),
 		onPause: function() { this.sync_current_track_pause_buttons(); }.bind(this),
 		onTracklistEnd: function() { this.reset_played_track_buttons(); }.bind(this)

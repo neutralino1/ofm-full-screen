@@ -5,7 +5,7 @@
   <%= javascript_include_tag "jquery-1.6.2.min" %>
   <%= javascript_include_tag "player_api" %>
   <%= javascript_include_tag 'swfupload', 'jquery.swfupload' %>
-  <%= javascript_include_tag 'application', 'shared', 'page', 'player' %>
+  <%= javascript_include_tag 'application', 'shared', 'page-edit', 'player' %>
   <script type="text/javascript">
     OFMFS.loggedIn = <%= current_user ? 'true' : 'false' %>
   </script>
@@ -23,11 +23,11 @@
 </div>
 <%= form_for(@page) do |f| %>
 <div id="social" class="fright">
-  <div id="edit-links" class="help">
-<%= f.text_field :facebook %><br/>
-<%= f.text_field :twitter %><br/>
-<%= f.text_field :website %><br/>
-<%= f.text_field :myspace %>
+  <div id="edit-links" class="help second">
+<%= f.text_field :facebook, :value => Page::DEFAULT[:facebook] %><br/>
+<%= f.text_field :twitter, :value => Page::DEFAULT[:twitter] %><br/>
+<%= f.text_field :website, :value => Page::DEFAULT[:website] %><br/>
+<%= f.text_field :myspace, :value => Page::DEFAULT[:myspace] %>
     <div class="arrow-border"></div>
     <div class="arrow"></div>
   </div>
@@ -40,11 +40,17 @@
   <%= link_to "", "javascript://", :class => "button medium facebook
   fright faded", :id => "facebook-btn" %>
 </div>
+<%= hidden_field_tag 'page[token]' %>
+<%= hidden_field_tag 'page[track_id]', @track.id %>
+<%= f.submit 'Save page', :class => 'second' %>
 <% end %>
+<div id="upload-tooltip" class="help first">Choose your background picture.
+  <div class="arrow-border"></div>
+  <div class="arrow"></div>
+</div>
 <input type="button" id="upload" />
 <div id="search-player"></div>
 <div id="pending" class="hidden"><%= image_tag 'spinner1.gif' %></div>
-<%= hidden_field_tag 'page[token]' %>
 <iframe id="upload_target" name="upload_target"
 	src="/upload_form?track_id=<%= @track.id %>"></iframe>
 </body>
