@@ -1,26 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title><%= @track.artist_string %> - <%= @track.title %></title>
-  <%= javascript_include_tag "jquery-1.6.2.min" %>
-  <%= javascript_include_tag "player_api" %>
-  <%= javascript_include_tag 'swfupload', 'jquery.swfupload' %>
-  <%= javascript_include_tag 'application', 'shared', 'page-edit', 'player' %>
-  <script type="text/javascript">
-    OFMFS.loggedIn = <%= current_user ? 'true' : 'false' %>
-  </script>
-  <%= stylesheet_link_tag 'shared', 'page' %>
-  <%= csrf_meta_tag %>
-</head>
-<body>
 
-<h1 class="istok"><%= @track.title %></h1>
-<h2 class="istok"><%= @track.artist_string %></h2>
-<div id="player" class="fleft">
-  <%= link_to "", "javascript://", :class => "button large loading
-  fleft #{@track.id}-track", :id => "#{@track.id}-track",
-  :title => "Play music by #{@track.artist_string}" %>
-</div>
+<div id="pending" class="hidden"><%= image_tag 'spinner1.gif' %></div>
+<iframe id="upload_target" name="upload_target"
+	src="/upload_form?track_id=<%= @track.id %>"></iframe>
 <%= form_for(@page) do |f| %>
 <div id="social" class="fright">
   <div id="edit-links" class="help second">
@@ -49,9 +30,3 @@
   <div class="arrow"></div>
 </div>
 <input type="button" id="upload" />
-<div id="search-player"></div>
-<div id="pending" class="hidden"><%= image_tag 'spinner1.gif' %></div>
-<iframe id="upload_target" name="upload_target"
-	src="/upload_form?track_id=<%= @track.id %>"></iframe>
-</body>
-</html>

@@ -9,7 +9,8 @@ class PagesController < ApplicationController
   def new
     @track = OfmFullScreen.ofm.track(params[:track_id])
     @page = Page.new(:track_id => @track.id)
-    render 'new', :layout => false
+    @edit = true
+    render 'new', :layout => 'page'
   end
 
   def create
@@ -28,7 +29,8 @@ class PagesController < ApplicationController
     @page = Page.find_by_custom(params[:id]) unless @page
     return redirect_to root_path unless @page
     @track = OfmFullScreen.ofm.track(@page.track_id)
-    render 'show', :layout => false
+    @edit = false
+    render 'show', :layout => 'page'
   end
 
   def destroy

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @track.artist_string %> - <%= @track.title %></title>
+  <%= javascript_include_tag "jquery-1.6.2.min" %>
+  <%= javascript_include_tag "player_api" %>
+  <%= javascript_include_tag 'swfupload', 'jquery.swfupload' %>
+  <%= javascript_include_tag 'application', 'shared', 'page', 'player' %>
+  <script type="text/javascript">
+    OFMFS.loggedIn = <%= current_user ? 'true' : 'false' %>
+  </script>
+  <%= stylesheet_link_tag 'shared', 'page' %>
+  <%= csrf_meta_tag %>
+</head>
+<body style="background-image:url('/backgrounds/<%= @page.id %>.jpg');">
+<h1 class="istok text-shadow" id="track-title"><%= @track.title %></h1>
+<h2 class="istok text-shadow"
+    id="artist-name"><%= @track.artist_string %></h2>
+<div id="play-container" class="widget"></div>
+<div id="player" class="fleft">
+  <%= link_to "", "javascript://", :class => "button large loading
+  fleft #{@track.id}-track", :id => "#{@track.id}-track",
+  :title => "Play music by #{@track.artist_string}" %>
+</div>
+<%= yield %>
+<div id="search-player"></div>
+</body>
+</html>
