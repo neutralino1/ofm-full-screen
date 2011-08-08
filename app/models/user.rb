@@ -1,5 +1,5 @@
 require 'digest/sha1'
-require 'vendor/plugins/restful_authentication/init.rb'
+#require 'vendor/plugins/restful_authentication/init.rb'
 
 class User < ActiveRecord::Base
   include Authentication
