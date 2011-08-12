@@ -10,11 +10,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110811233447) do
+ActiveRecord::Schema.define(:version => 20110812203147) do
 
   create_table "pages", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "track_id",   :null => false
+    t.integer  "track_id",      :null => false
     t.string   "facebook"
     t.string   "twitter"
     t.string   "myspace"
@@ -25,6 +25,10 @@ ActiveRecord::Schema.define(:version => 20110811233447) do
     t.datetime "updated_at"
     t.integer  "title_x"
     t.integer  "title_y"
+    t.string   "title_font"
+    t.string   "artist_font"
+    t.string   "title_colour"
+    t.string   "artist_colour"
   end
 
   add_index "pages", ["custom"], :name => "index_pages_on_custom", :unique => true

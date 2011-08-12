@@ -13,6 +13,9 @@ class Page < ActiveRecord::Base
     :website => 'http://www.'
   }
 
+  FONTS = ['Comfortaa', 'Wallpoet', 'Special Elite', 'Zeyada', 'Bowlby One SC', 'Bangers',
+          'Orbitron', 'Lobster', 'Covered By Your Grace']
+
   attr_accessor :token
 
   before_save :clear_defaults, :strip_slash

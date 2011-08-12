@@ -86,6 +86,7 @@ div#upload {
 }
 
 input#upload {
+//    z-index:200px;
     border:0px;
     background:transparent;
     width:40px;
@@ -95,15 +96,13 @@ input#upload {
     left:0;
     background-position: -200px 0;
     background-image:url(/images/sprite.png);
-    margin-left:-20px;
-    margin-top:-20px;
 }
 
 div#upload-tooltip {
     position:fixed;
     color:#313233;
     width:185px;
-    margin-left:-95px;
+//    margin-left:-95px;
     margin-top:60px;
 }
 
@@ -115,7 +114,7 @@ div#upload-tooltip div.arrow{
     height:0;
     width:0;
     position:absolute;
-    left:75px;
+    left:78px;
     top:-40px;
 }
 
@@ -126,7 +125,7 @@ div#upload-tooltip div.arrow-border {
   height:0;
   width:0;
   position:absolute;
-  left:75px;
+  left:78px;
   top:-41px;
 }
 
@@ -229,4 +228,50 @@ div.draggable:hover {
 
 input#upload:hover { 
     background-position: -200px -40px; 
+}
+
+div#font-modal {
+    position:fixed;
+    left:10px;
+    top:10px;
+    width:960px;
+    background-color:#EFEFE9;
+    color:#313233;
+    border: 10px solid #313233;
+    border-radius:10px;
+    font-size:30px;
+    z-index:200;
+    padding:20px;
+}
+
+div#font-modal h3{
+    margin:10px;
+    color:#3DAFDF;
+}
+
+div#font-modal table{
+    margin:20px auto;
+}
+
+div#font-modal td{
+    padding:10px;
+    margin:10px 0;
+    text-align:center;
+    width:33%;
+    height:40px;
+}
+
+div#font-modal td:hover{
+    color:#EFEFE9;
+    background-color:#3DAFDF;
+    cursor:pointer;
+}
+
+div#overlay {
+    width:100%;
+    height:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    background-color:rgba(0,0,0,0.4);
 }

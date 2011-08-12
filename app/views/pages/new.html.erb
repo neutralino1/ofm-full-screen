@@ -6,8 +6,10 @@
 <h1 class="istok text-shadow" id="track-title"><%= @track.title %></h1>
 <h2 class="istok text-shadow"
     id="artist-name"><%= @track.artist_string %></h2>
-<%= hidden_field_tag 'page[title_x]', 50 %>
-<%= hidden_field_tag 'page[title_y]', 50 %>
+<%= f.hidden_field :title_x, :value => 50 %>
+<%= f.hidden_field :title_y, :value => 50 %>
+<%= f.hidden_field :title_font %>
+<%= link_to "choose font", 'javascript://', :id => 'title-font-link' %>
 <div id="title-tooltip" class="help second">
 Move me around!
 <div class="arrow-border"></div>
@@ -42,7 +44,24 @@ Move me around!
   <div class="arrow-border"></div>
   <div class="arrow"></div>
 </div>
+<div id="font-modal" class="hidden">
+<h3 class="istok">Choose your title font</h3>
+<table>
+<% Page::FONTS.each_with_index do |font, i| %>
+<% if i%3 == 0 %>
+<tr>
+<% end %>
+<td data="<%= font %>"><%= @track.title %></td>
+<% if i%3 == 2 %>
+</tr>
+<% end %>
+<% end %>
+</table>
+<div class="fclear"></div>
+</ul>
+</div>
 <input type="button" id="upload" />
 <iframe id="upload_target" name="upload_target"
 	src="/upload_form?track_id=<%= @track.id %>"></iframe>
 <div id="pending" class="hidden"><%= image_tag 'spinner1.gif' %></div>
+<div id="overlay" class="hidden"></div>
