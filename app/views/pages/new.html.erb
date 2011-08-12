@@ -1,8 +1,19 @@
-
-<div id="pending" class="hidden"><%= image_tag 'spinner1.gif' %></div>
-<iframe id="upload_target" name="upload_target"
-	src="/upload_form?track_id=<%= @track.id %>"></iframe>
+<script type="text/javascript">
+  OFMFS.Page.edit = true;
+</script>
 <%= form_for(@page) do |f| %>
+<div id="title" class="draggable">
+<h1 class="istok text-shadow" id="track-title"><%= @track.title %></h1>
+<h2 class="istok text-shadow"
+    id="artist-name"><%= @track.artist_string %></h2>
+<%= hidden_field_tag 'page[title_x]', 50 %>
+<%= hidden_field_tag 'page[title_y]', 50 %>
+<div id="title-tooltip" class="help second">
+Move me around!
+<div class="arrow-border"></div>
+<div class="arrow"></div>
+</div>
+</div>
 <div id="social" class="fright">
   <div id="edit-links" class="help second">
 <%= f.text_field :facebook, :value => Page::DEFAULT[:facebook] %><br/>
@@ -12,6 +23,7 @@
     <div class="arrow-border"></div>
     <div class="arrow"></div>
   </div>
+<div class="widget" id="social-container">
   <%= link_to "", "javascript://", :class => "button medium myspace
   fright faded", :id => "myspace-btn" %>
   <%= link_to "", "javascript://", :class => "button medium website
@@ -20,6 +32,7 @@
   fright faded", :id => "twitter-btn" %>
   <%= link_to "", "javascript://", :class => "button medium facebook
   fright faded", :id => "facebook-btn" %>
+</div>
 </div>
 <%= hidden_field_tag 'page[token]' %>
 <%= hidden_field_tag 'page[track_id]', @track.id %>
@@ -30,3 +43,6 @@
   <div class="arrow"></div>
 </div>
 <input type="button" id="upload" />
+<iframe id="upload_target" name="upload_target"
+	src="/upload_form?track_id=<%= @track.id %>"></iframe>
+<div id="pending" class="hidden"><%= image_tag 'spinner1.gif' %></div>

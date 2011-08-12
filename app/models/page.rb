@@ -45,12 +45,16 @@ class Page < ActiveRecord::Base
 
   def url
     path = custom ? custom : "pages/#{id}"
-    "http://ofm-fs.heroku.com/#{path}"
+    "http://electric-samurai-728.heroku.com/#{path}"
   end
 
   def twitter_link
     "http://twitter.com/#{twitter[1..-1]}"
   end
 
+  def facebook_url
+    return facebook if facebook
+    url
+  end
   
 end

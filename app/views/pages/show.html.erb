@@ -1,4 +1,10 @@
-<div id="social" class="fright">
+<div id="title" style="top:<%= @page.title_y %>px;
+		       left:<%= @page.title_x %>px;">
+<h1 class="istok text-shadow" id="track-title"><%= @track.title %></h1>
+<h2 class="istok text-shadow"
+    id="artist-name"><%= @track.artist_string %></h2>
+</div>
+<div class="widget" id="social-container">
   <%= link_to("", @page.myspace, :class => "button medium myspace
   fright", :id => "myspace-btn", :target => 'new') if @page.myspace %>
   <%= link_to("", @page.website, :class => "button medium website
@@ -8,3 +14,11 @@
   <%= link_to("", @page.facebook, :class => "button medium facebook
   fright", :id => "facebook-btn", :target => 'new') if @page.facebook %>
 </div>
+<div id="like">
+  <iframe src="http://www.facebook.com/plugins/like.php?href=<%= CGI.escape(@page.facebook_url)
+	       %>&amp;layout=box_count&amp;show_faces=false&amp;width=30&amp;action=like&amp;colorscheme=light&amp;height=70"
+	  scrolling="no" frameborder="0"></iframe></br>
+  <a href="http://twitter.com/share" class="twitter-share-button"
+  data-text="<%= @track.title %> by <%= @track.artist_string %> in full
+  screen via @officialfm" data-count="none">Tweet</a>
+      </div>

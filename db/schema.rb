@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110730174203) do
+ActiveRecord::Schema.define(:version => 20110811233447) do
 
   create_table "pages", :force => true do |t|
     t.integer  "user_id"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(:version => 20110730174203) do
     t.boolean  "public"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "title_x"
+    t.integer  "title_y"
   end
 
   add_index "pages", ["custom"], :name => "index_pages_on_custom", :unique => true

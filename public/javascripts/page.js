@@ -8,6 +8,23 @@ OFMFS.Page = {
 	this.connectUploadButton();
 	this.connectSocialButtons();
 	this.setupTooltips();
+	this.setupDraggable();
+    },
+
+    setupDraggable:function(){
+	this.title = $('div#title');
+	this.titleTooltip = $('div#title-tooltip');
+	this.title.draggable(event,{
+	    stop:function(){
+		this.titleTooltip.removeClass('faded');
+		var pos = this.title.position();
+		$('input#page_title_x').val(pos.left);
+		$('input#page_title_y').val(pos.top);
+	    }.bind(this)
+	});
+	this.title.bind('mousedown', function(){
+	    this.titleTooltip.addClass('faded');
+	}.bind(this));
     },
 
     setupTooltips:function(){
