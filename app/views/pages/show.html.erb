@@ -1,6 +1,7 @@
 <div id="title" style="top:<%= @page.title_y %>px;
 		       left:<%= @page.title_x %>px;">
-<h1 class="istok text-shadow" id="track-title"><%= @track.title %></h1>
+<h1 class="text-shadow" id="track-title" style="font-family:<%= @page.title_font_or_default %>;font-weight:bold;"
+><%= @track.title %></h1>
 <h2 class="istok text-shadow"
     id="artist-name"><%= @track.artist_string %></h2>
 </div>

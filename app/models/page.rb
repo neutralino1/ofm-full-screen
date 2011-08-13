@@ -59,5 +59,9 @@ class Page < ActiveRecord::Base
     return facebook if facebook
     url
   end
-  
+
+  def title_font_or_default
+    title_font || 'Istok Web'
+  end
+
 end

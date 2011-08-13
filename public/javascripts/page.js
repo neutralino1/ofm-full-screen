@@ -7,6 +7,7 @@ OFMFS.Page = {
 
     setupEdit:function(){
 	this.overlay = $('div#overlay');
+	this.titleTooltips = $('div.title-tooltips');
 	this.connectUploadButton();
 	this.connectSocialButtons();
 	this.setupTooltips();
@@ -19,18 +20,31 @@ OFMFS.Page = {
     setupFontModal:function(){
 	this.fontModal = $('div#font-modal');
 	$('a#title-font-link').click(this.showFontModal.bind(this));
+	$('a#artist-font-link').click(this.showFontModal.bind(this));
 	$('div#font-modal td').click(this.setFont.bind(this));
+	$('a#cancel-font').click(this.hideFontModal.bind(this));
     },
 
     setFont:function(event){
-	this.overlay.hide();
-	this.fontModal.hide();
+	this.hideFontModal();
 	var font = $(event.target).attr('data');
-	$('input#page_title_font').val(font);
-	$('h1#track-title').css({'font-family': font, 'font-weight' : 'normal'});
+	$('input#page_'+this.fontTarget+'_font').val(font);
+	if (this.fontTarget == 'title')
+	    $('h1#track-title').css({'font-family': font, 'font-weight' : 'normal'});
+	if (this.fontTarget == 'artist')
+	    $('h2#artist-name').css({'font-family': font, 'font-weight' : 'normal'});
     },
 
-    showFontModal:function(){
+    hideFontModal:function(){
+	this.overlay.hide();
+	this.fontModal.hide();
+	this.titleTooltips.removeClass('faded');
+    },
+    
+    showFontModal:function(event){
+	id = event.target.id;
+	if(/title/.test(id)) this.fontTarget = 'title';
+	if(/artist/.test(id)) this.fontTarget = 'artist';
 	this.overlay.show();
 	this.centerOnScreen(this.fontModal);
 	this.fontModal.show();
@@ -62,32 +76,18 @@ OFMFS.Page = {
 	var y = (window.innerHeight - element.height()) * .5;
 	element.css({'left':x, 'top':y});
     },
-
-    setupFontSelect:function(){
-	fonts = $.map($('select#page_title_font option'),function(e){
-	    return $(e).val();
-	});
-	console.log(fonts);
-
-	
-	$('select#page_title_font option').each(function(){
-	    $(this).css({'font-family': $(this).val()})
-	});
-	
-    },
     
     setupDraggable:function(){
-	this.titleTooltip = $('div#title-tooltip');
 	this.title.draggable(event,{
 	    stop:function(){
-		this.titleTooltip.removeClass('faded');
+		this.titleTooltips.removeClass('faded');
 		var pos = this.title.position();
 		$('input#page_title_x').val(pos.left);
 		$('input#page_title_y').val(pos.top);
 	    }.bind(this)
 	});
 	this.title.bind('mousedown', function(){
-	    this.titleTooltip.addClass('faded');
+	    this.titleTooltips.addClass('faded');
 	}.bind(this));
     },
 

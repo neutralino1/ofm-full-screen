@@ -9,11 +9,19 @@
 <%= f.hidden_field :title_x, :value => 50 %>
 <%= f.hidden_field :title_y, :value => 50 %>
 <%= f.hidden_field :title_font %>
-<%= link_to "choose font", 'javascript://', :id => 'title-font-link' %>
-<div id="title-tooltip" class="help second">
+<%= f.hidden_field :artist_font %>
+<div id="title-tooltip" class="help title-tooltips second">
 Move me around!
 <div class="arrow-border"></div>
 <div class="arrow"></div>
+</div>
+<div id="title-font-tooltip" class="help title-tooltips second">
+<div class="arrow-border"></div>
+<div class="arrow"></div>
+<%= link_to "Click here to change your title's font", 'javascript://',
+    :id => 'title-font-link'%>
+<%= link_to "Click here to change your artist's font", 'javascript://',
+    :id => 'artist-font-link'%>
 </div>
 </div>
 <div id="social" class="fright">
@@ -57,7 +65,8 @@ Move me around!
 <% end %>
 <% end %>
 </table>
-<div class="fclear"></div>
+<div class="fclear align-text-right"><%= link_to 'Cancel',
+					 'javascript://', :id => 'cancel-font' %></div>
 </ul>
 </div>
 <input type="button" id="upload" />
