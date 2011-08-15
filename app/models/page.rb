@@ -64,4 +64,24 @@ class Page < ActiveRecord::Base
     title_font || 'Istok Web'
   end
 
+  def artist_font_or_default
+    artist_font || 'Istok Web'
+  end
+
+  def title_color_or_default
+    title_colour || '#ffffff'
+  end
+
+  def artist_color_or_default
+    artist_colour || '#ffffff'
+  end
+
+  def title_size_or_default
+    title_size || '50'
+  end
+
+  def artist_size_or_default
+    artist_size || '30'
+  end
+
 end

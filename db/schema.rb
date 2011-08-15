@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110812203147) do
+ActiveRecord::Schema.define(:version => 20110815222758) do
 
   create_table "pages", :force => true do |t|
     t.integer  "user_id"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(:version => 20110812203147) do
     t.string   "artist_font"
     t.string   "title_colour"
     t.string   "artist_colour"
+    t.integer  "title_size"
+    t.integer  "artist_size"
   end
 
   add_index "pages", ["custom"], :name => "index_pages_on_custom", :unique => true

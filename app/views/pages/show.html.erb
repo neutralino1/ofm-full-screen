@@ -1,9 +1,28 @@
+<script type="text/javascript">
+  $(function(){
+  WebFontConfig = {
+            google: { families: ['<%= @page.title_font %>',
+  '<%= @page.artist_font %>'] }
+	};
+	var wf = document.createElement('script');
+	wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+	    '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+	wf.type = 'text/javascript';
+	wf.async = 'true';
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(wf, s);
+});
+</script>
 <div id="title" style="top:<%= @page.title_y %>px;
 		       left:<%= @page.title_x %>px;">
-<h1 class="text-shadow" id="track-title" style="font-family:<%= @page.title_font_or_default %>;font-weight:bold;"
+<h1 class="text-shadow" id="track-title"
+    style="font-family:<%= @page.title_font_or_default
+	   %>;font-weight:normal;color:<%=@page.title_color_or_default
+	   %>;font-size:<%= @page.title_size_or_default %>px;"
 ><%= @track.title %></h1>
 <h2 class="istok text-shadow"
-    id="artist-name"><%= @track.artist_string %></h2>
+    id="artist-name" style="font-family:<%= @page.artist_font_or_default
+	   %>;font-weight:normal;color:<%=@page.artist_color_or_default %>;font-size:<%= @page.artist_size_or_default %>px;"><%= @track.artist_string %></h2>
 </div>
 <div class="widget" id="social-container">
   <%= link_to("", @page.myspace, :class => "button medium myspace

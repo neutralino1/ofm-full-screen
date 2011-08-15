@@ -8,19 +8,77 @@ OFMFS.Page = {
     setupEdit:function(){
 	this.overlay = $('div#overlay');
 	this.titleTooltips = $('div.title-tooltips');
+	this.trackTitle = $('h1#track-title');
+	this.artistName = $('h2#artist-name');
 	this.connectUploadButton();
 	this.connectSocialButtons();
 	this.setupTooltips();
 	this.setupDraggable();
 	this.setupFontModal();
-//	this.setupFontSelect();
-//	this.loadFont();
+	this.setupColorPicker();
+	this.setupSizeSelect();
+    },
+
+    setupSizeSelect:function(){
+	$('select#page_title_size').change(this.setFontSize.bind(this));
+	$('select#page_artist_size').change(this.setFontSize.bind(this));
+    },
+
+    setFontSize:function(event){
+	sel = $(event.target);
+	if (/title/.test(sel.attr('id'))) this.trackTitle.css('font-size', sel.val() +'px');
+	if (/artist/.test(sel.attr('id'))) this.artistName.css('font-size', sel.val() +'px');
+    },
+    
+    setupColorPicker:function(){
+	$('div#title-color-picker').ColorPicker({
+	    flat:true,
+	    onShow: function (colpkr) {
+		$(colpkr).fadeIn(500);
+		this.titleTooltips.removeClass('faded');
+		return false;
+	    }.bind(this),
+	    onHide: function (colpkr) {
+		$(colpkr).fadeOut(500);
+		this.titleTooltips.removeClass('faded');
+		return false;
+	    }.bind(this),
+	    onChange: function (hsb, hex, rgb) {
+		$('div#title-color-preview').css('backgroundColor', '#' + hex);
+		this.trackTitle.css('color', '#' + hex);
+		$('input#page_title_colour').val('#' + hex);
+	    }.bind(this)
+	});
+	$('div#title-color-preview').click(function(){
+	    $('div#title-color-picker').toggleClass('hidden');
+	});
+	$('div#artist-color-picker').ColorPicker({
+	    flat:true,
+	    onShow: function (colpkr) {
+		$(colpkr).fadeIn(500);
+		this.titleTooltips.removeClass('faded');
+		return false;
+	    }.bind(this),
+	    onHide: function (colpkr) {
+		$(colpkr).fadeOut(500);
+		this.titleTooltips.removeClass('faded');
+		return false;
+	    }.bind(this),
+	    onChange: function (hsb, hex, rgb) {
+		$('div#artist-color-preview').css('backgroundColor', '#' + hex);
+		this.artistName.css('color', '#' + hex);
+		$('input#page_artist_colour').val('#' + hex);
+	    }.bind(this)
+	});
+	$('div#artist-color-preview').click(function(){
+	    $('div#artist-color-picker').toggleClass('hidden');
+	});
     },
 
     setupFontModal:function(){
 	this.fontModal = $('div#font-modal');
-	$('a#title-font-link').click(this.showFontModal.bind(this));
-	$('a#artist-font-link').click(this.showFontModal.bind(this));
+	$('img#title-font-link').click(this.showFontModal.bind(this));
+	$('img#artist-font-link').click(this.showFontModal.bind(this));
 	$('div#font-modal td').click(this.setFont.bind(this));
 	$('a#cancel-font').click(this.hideFontModal.bind(this));
     },
@@ -89,6 +147,7 @@ OFMFS.Page = {
 	this.title.bind('mousedown', function(){
 	    this.titleTooltips.addClass('faded');
 	}.bind(this));
+	this.titleTooltips.bind('mousedown', function(e){e.stopPropagation();});
     },
 
     setupTooltips:function(){

@@ -1,3 +1,5 @@
+<%= javascript_include_tag 'colorpicker' %>
+<%= stylesheet_link_tag 'colorpicker' %>
 <script type="text/javascript">
   OFMFS.Page.edit = true;
 </script>
@@ -10,18 +12,49 @@
 <%= f.hidden_field :title_y, :value => 50 %>
 <%= f.hidden_field :title_font %>
 <%= f.hidden_field :artist_font %>
+<%= f.hidden_field :title_colour %>
+<%= f.hidden_field :artist_colour %>
 <div id="title-tooltip" class="help title-tooltips second">
 Move me around!
 <div class="arrow-border"></div>
 <div class="arrow"></div>
 </div>
 <div id="title-font-tooltip" class="help title-tooltips second">
-<div class="arrow-border"></div>
-<div class="arrow"></div>
-<%= link_to "Click here to change your title's font", 'javascript://',
-    :id => 'title-font-link'%>
-<%= link_to "Click here to change your artist's font", 'javascript://',
-    :id => 'artist-font-link'%>
+  <div class="arrow-border"></div>
+  <div class="arrow"></div>
+  <table>
+    <tr>
+<th></th><th>FONT</th><th>COLOR</th><th>SIZE</th></tr>
+    </tr>
+    <tr>
+      <td>Title</td>
+      <td><%= image_tag "font.png",
+	      :id => 'title-font-link', :class => 'font-link'%></td><td>
+	<div id="title-color-preview" class="color-preview">
+	  <div id="title-color-picker" class="hidden color-picker">
+	  </div>
+    </div></td>
+      <td>
+	<%= f.select :title_size, options_for_select(8.upto(70), 50) %>px
+      </td>
+    </tr>
+    <tr>
+      <td>Artist name</td>
+      <td>
+	<%= image_tag "font.png",
+	    :id => 'artist-font-link', :class => 'font-link' %>
+	</td>
+      <td>
+	<div id="artist-color-preview" class="color-preview">
+	  <div id="artist-color-picker" class="hidden color-picker">
+	  </div>
+	</div>
+	</td>
+      <td>
+	<%= f.select :artist_size,options_for_select(8.upto(70), 30) %>px
+      </td>
+    </tr>
+  </table>
 </div>
 </div>
 <div id="social" class="fright">
