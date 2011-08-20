@@ -13,7 +13,7 @@ input[type='text'] {
     border:1px solid #D1D2D3;
 }
 
-div#edit-links input {
+div#edit-links input[tpye='text'] {
     width:300px;
     margin:5px 5px;
 }
@@ -339,4 +339,43 @@ img.font-link {
 
 img.font-link:hover {
     cursor:pointer;
+}
+
+div#custom-url {
+    position:fixed;
+    left:100px;
+    top:20px;
+}
+
+div#custom-ul input[tpye='text'] {
+    width:350px;
+}
+
+span#base-url {
+    font-weight:bold;
+    font-size:15px;
+    color:#313233;
+}
+
+div#custom-url div.arrow{
+    content: " ";
+    border-color: transparent transparent #FAF7EB transparent;
+    border-style: solid;
+    border-width: 20px;
+    height:0;
+    width:0;
+    position:absolute;
+    left:78px;
+    top:-40px;
+}
+
+div#custom-url div.arrow-border {
+  border-color: transparent transparent #F0E7C2 transparent;
+  border-style: solid;
+  border-width: 20px;
+  height:0;
+  width:0;
+  position:absolute;
+  left:78px;
+  top:-41px;
 }

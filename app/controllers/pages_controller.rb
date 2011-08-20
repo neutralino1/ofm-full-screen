@@ -16,9 +16,13 @@ class PagesController < ApplicationController
   def create
     logger.info params[:page].inspect
     page = current_user.pages.build(params[:page])
-    if page.save!
+    if page.save
       setup_for_pages
-      redirect_to page_path(page)
+      if page.custom?
+        redirect_to '/'+page.custom
+      else
+        redirect_to page_path(page)
+      end
     else
       raise page.errors
     end

@@ -10,6 +10,12 @@ OFMFS.Page = {
 	this.titleTooltips = $('div.title-tooltips');
 	this.trackTitle = $('h1#track-title');
 	this.artistName = $('h2#artist-name');
+	this.firsts = $('.first');
+	this.seconds = $('.second');
+	this.thirds = $('.third');
+	this.fourths = $('.fourth');
+	this.fifths = $('.fifth');
+	this.toolTips = $('div.help');
 	this.connectUploadButton();
 	this.connectSocialButtons();
 	this.setupTooltips();
@@ -17,6 +23,25 @@ OFMFS.Page = {
 	this.setupFontModal();
 	this.setupColorPicker();
 	this.setupSizeSelect();
+	this.setupOKButtons();
+    },
+
+    setupOKButtons:function(){
+	$('input#OK-links').click(function(event){
+	    event.preventDefault();
+	    this.seconds.addClass('faded');
+	    this.thirds.fadeIn();
+	}.bind(this));
+	$('input#OK-title').click(function(event){
+	    event.preventDefault();
+	    this.thirds.addClass('faded');
+	    this.fourths.fadeIn();
+	}.bind(this));
+	$('input#OK-custom').click(function(event){
+	    event.preventDefault();
+	    this.fourths.addClass('faded');
+	    this.fifths.fadeIn();
+	}.bind(this));
     },
 
     setupSizeSelect:function(){
@@ -151,9 +176,8 @@ OFMFS.Page = {
     },
 
     setupTooltips:function(){
-	this.firsts = $('.first');
-	this.seconds = $('.second');
-	this.seconds.hide();
+	this.toolTips.hide();
+	$('input#page_submit').hide();
 	this.firsts.show();
     },
     

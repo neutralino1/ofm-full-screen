@@ -16,13 +16,14 @@
 <div id="title" style="top:<%= @page.title_y %>px;
 		       left:<%= @page.title_x %>px;">
 <h1 class="text-shadow" id="track-title"
-    style="font-family:<%= @page.title_font_or_default
-	   %>;font-weight:normal;color:<%=@page.title_color_or_default
+    style="font-family:'<%= @page.title_font_or_default
+	   %>';<% if @page.title_font? %>font-weight:normal;<% end %>color:<%=@page.title_color_or_default
 	   %>;font-size:<%= @page.title_size_or_default %>px;"
 ><%= @track.title %></h1>
 <h2 class="istok text-shadow"
-    id="artist-name" style="font-family:<%= @page.artist_font_or_default
-	   %>;font-weight:normal;color:<%=@page.artist_color_or_default %>;font-size:<%= @page.artist_size_or_default %>px;"><%= @track.artist_string %></h2>
+    id="artist-name" style="font-family:'<%= @page.artist_font_or_default
+	   %>', sans-serif;<%if @page.artist_font?
+    %>font-weight:normal;<% end %>color:<%=@page.artist_color_or_default %>;font-size:<%= @page.artist_size_or_default %>px;"><%= @track.artist_string %></h2>
 </div>
 <div class="widget" id="social-container">
   <%= link_to("", @page.myspace, :class => "button medium myspace

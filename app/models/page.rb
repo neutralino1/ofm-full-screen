@@ -29,6 +29,9 @@ class Page < ActiveRecord::Base
     DEFAULT.each do |k,v|
       self[k] = nil if self[k] == v
     end
+    [self.artist_font, self.title_font, self.artist_colour, self.title_colour].each do |it| 
+      it = nil if it.blank?
+    end
   end
 
   def set_defaults
@@ -84,4 +87,14 @@ class Page < ActiveRecord::Base
     artist_size || '30'
   end
 
+  def default_custom
+    title = track.title
+    title.gsub!(/([^a-zA-Z0-9]+)/,'')
+    n = -1
+    until !Page.find_by_custom(title + (n > 0 ? n.to_s : ''))
+      n += 1
+    end
+    title + n.to_s
+  end
+  
 end
