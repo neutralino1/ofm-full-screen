@@ -11,10 +11,10 @@
 </div>
 <img src="<%= track.picture_absolute_url %>" class="fright small-thumb">
 <div class="fclear"></div>
-URL : <%= link_to page.url, page.url, :target => 'new' %>
+URL : <%= link_to "/" + (page.custom ? page.custom : "pages/#{page.id}"), page.url, :target => 'new' %>
 <div class="fright manage-links hidden">
-<%= link_to 'edit', 'javascript://', :id => "#{page.id}-page-edit",
-					     :class => 'page-edit-link' %> | <%= link_to 'delete',
+<%= link_to 'edit', edit_page_path(page), :class => 'page-edit-link',
+					     :target => 'new' %> | <%= link_to 'delete',
 					     'javascript://', :id =>
 					     "#{page.id}-page-delete",
 					     :class => 'page-delete-link'

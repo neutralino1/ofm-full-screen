@@ -1,8 +1,18 @@
 OFMFS.Page = {
     init:function(){
 	this.title = $('div#title');
-	if (this.edit) this.setupEdit();
+	if (this.edit) {
+	    this.setupEdit();
+	    if (!this.newPage) this.showAllToolTips();
+	}
 	OFMFS.Player.init();
+    },
+
+    showAllToolTips:function(){
+	this.uploadButton.addClass('faded');
+	this.toolTips.addClass('faded');
+	this.toolTips.show();
+	$('input#page_submit').show();
     },
 
     setupEdit:function(){

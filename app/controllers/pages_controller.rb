@@ -6,15 +6,25 @@ class PagesController < ApplicationController
     @pages = current_user.pages
   end
 
+  def edit
+    @page = Page.find(params[:id])
+    @track = @page.track
+    @new = false
+    render 'new', :layout => 'page'
+  end
+
   def new
     @track = OfmFullScreen.ofm.track(params[:track_id])
-    @page = Page.new(:track_id => @track.id)
-    @edit = true
+    @page = Page.new(:track_id => @track.id, :title_x => 50, :title_y => 50,
+                     :facebook => Page::DEFAULT[:facebook],
+                     :twitter => Page::DEFAULT[:twitter],
+                     :website => Page::DEFAULT[:website],
+                     :myspace => Page::DEFAULT[:myspace])
+    @new = true
     render 'new', :layout => 'page'
   end
 
   def create
-    logger.info params[:page].inspect
     page = current_user.pages.build(params[:page])
     if page.save
       setup_for_pages
@@ -25,6 +35,15 @@ class PagesController < ApplicationController
       end
     else
       raise page.errors
+    end
+  end
+
+  def update
+    @page = Page.find(params[:id])
+    if @page.update_attributes(params[:page])
+      redirect_to(@page)
+    else
+      raise @page.errors
     end
   end
 

@@ -19,7 +19,7 @@ class Page < ActiveRecord::Base
   attr_accessor :token
 
   before_save :clear_defaults, :strip_slash
-  after_save :rename_image
+  after_create :rename_image
 
   def rename_image
     FileUtils.mv("public/backgrounds/#{token}.jpg", "public/backgrounds/#{id}.jpg")
@@ -88,6 +88,7 @@ class Page < ActiveRecord::Base
   end
 
   def default_custom
+    return custom if custom
     title = track.title
     title.gsub!(/([^a-zA-Z0-9]+)/,'')
     n = -1

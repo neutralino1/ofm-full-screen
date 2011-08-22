@@ -2,14 +2,38 @@
 <%= stylesheet_link_tag 'colorpicker' %>
 <script type="text/javascript">
   OFMFS.Page.edit = true;
+  OFMFS.Page.newPage = <%= @new %>;
+</script>
+<script type="text/javascript">
+  $(function(){
+  WebFontConfig = {
+            google: { families: ['<%= @page.title_font %>',
+  '<%= @page.artist_font %>'] }
+	};
+	var wf = document.createElement('script');
+	wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+	    '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+	wf.type = 'text/javascript';
+	wf.async = 'true';
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(wf, s);
+});
 </script>
 <%= form_for(@page) do |f| %>
-<div id="title" class="draggable">
-<h1 class="istok text-shadow" id="track-title"><%= @track.title %></h1>
+<div id="title" class="draggable" style="top:<%= @page.title_y %>px;
+					 left:<%= @page.title_x %>px;">
+<h1 class="text-shadow" id="track-title"
+    style="font-family:'<%= @page.title_font_or_default
+	   %>';<% if @page.title_font? %>font-weight:normal;<% end %>color:<%=@page.title_color_or_default
+	   %>;font-size:<%= @page.title_size_or_default %>px;"
+><%= @track.title %></h1>
 <h2 class="istok text-shadow"
-    id="artist-name"><%= @track.artist_string %></h2>
-<%= f.hidden_field :title_x, :value => 50 %>
-<%= f.hidden_field :title_y, :value => 50 %>
+    id="artist-name" style="font-family:'<%= @page.artist_font_or_default
+	   %>', sans-serif;<%if @page.artist_font?
+    %>font-weight:normal;<% end %>color:<%=@page.artist_color_or_default %>;font-size:<%= @page.artist_size_or_default %>px;"><%= @track.artist_string %></h2>
+
+<%= f.hidden_field :title_x %>
+<%= f.hidden_field :title_y %>
 <%= f.hidden_field :title_font %>
 <%= f.hidden_field :artist_font %>
 <%= f.hidden_field :title_colour %>
@@ -61,10 +85,10 @@ Move me around!
 </div>
 <div id="social" class="fright">
   <div id="edit-links" class="help second">
-<%= f.text_field :facebook, :value => Page::DEFAULT[:facebook] %><br/>
-<%= f.text_field :twitter, :value => Page::DEFAULT[:twitter] %><br/>
-<%= f.text_field :website, :value => Page::DEFAULT[:website] %><br/>
-<%= f.text_field :myspace, :value => Page::DEFAULT[:myspace] %><br/>
+<%= f.text_field :facebook %><br/>
+<%= f.text_field :twitter %><br/>
+<%= f.text_field :website %><br/>
+<%= f.text_field :myspace %><br/>
 <%= submit_tag 'OK', :class => 'fright', :id => 'OK-links' %>
 <div class="fclear"></div>
     <div class="arrow-border"></div>
