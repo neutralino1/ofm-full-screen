@@ -3,6 +3,7 @@
 <script type="text/javascript">
   OFMFS.Page.edit = true;
   OFMFS.Page.newPage = <%= @new %>;
+  OFMFS.Page.tmpPath = "<%= Rails.root %>/tmp/";
 </script>
 <script type="text/javascript">
   $(function(){
@@ -136,7 +137,6 @@ Move me around!
 					 'javascript://', :id => 'cancel-font' %></div>
 </ul>
 </div>
-
 <input type="button" id="upload" />
 <iframe id="upload_target" name="upload_target"
 	src="/upload_form?track_id=<%= @track.id %>"></iframe>

@@ -34,3 +34,5 @@ gem 'mysql'
 
 gem 'officialfm'
 gem 'multi_json'
+#gem 's3_swf_upload', :git => 'git://github.com/nathancolgate/s3-swf-upload-plugin'
+#gem 'aws-s3', :require => 'aws/s3'

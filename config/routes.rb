@@ -1,4 +1,6 @@
 OfmFullScreen::Application.routes.draw do
+  resources :s3_uploads
+
   resources :users
   resources :pages
   resource :session, :only => [:new, :create, :destroy]
