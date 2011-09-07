@@ -19,6 +19,8 @@ test:
 
 production:
   adapter: mysql
-  database: neutralino1_ofm_full_screen
+  database: ofm_full_screen
+  username : root
+  password :
   pool: 5
   timeout: 5000

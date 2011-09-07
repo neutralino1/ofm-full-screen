@@ -4,8 +4,7 @@ class Picture < ActiveRecord::Base
 
   def self.save(upload)
     name =  upload['file'].original_filename
-    #directory = "public/backgrounds"
-    directory = "#{Rails.root}/tmp"
+    directory = "public/backgrounds"
     # create the file path
     filename = Digest::SHA1.hexdigest(Time.now.to_s)
     path = File.join(directory, "#{filename}.jpg")

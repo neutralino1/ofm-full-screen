@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   include Authentication::ByPassword
   include Authentication::ByCookieToken
 
-  has_many :pages
+  has_many :pages, :dependent => :destroy
 
   validates :login, :presence   => true,
                     :uniqueness => true,

@@ -217,7 +217,7 @@ OFMFS.Page = {
     },
     
     returnFromUpload:function(token){
-	$('body').css('background-image',"url('"+this.tmpPath+token+".jpg')");
+	$('body').css('background-image',"url('/backgrounds/"+token+".jpg')");
 	$('input#page_token').val(token);
 	this.uploadButton.addClass('faded');
 	this.firsts.fadeOut();
