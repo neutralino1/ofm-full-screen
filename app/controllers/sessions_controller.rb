@@ -19,10 +19,10 @@ class SessionsController < ApplicationController
       setup_for_pages
       render 'pages/index', :layout => false
     else
-      note_failed_signin
-      @login       = params[:login]
-      @remember_me = params[:remember_me]
-      render :action => 'new'
+      #note_failed_signin
+      #@login       = params[:login]
+      #@remember_me = params[:remember_me]
+      render :text => 'fail'#:action => 'new'
     end
   end
 

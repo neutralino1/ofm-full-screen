@@ -1,8 +1,9 @@
 <div id="login-box">
+<div class="hidden help" id="login-fail">Wrong credentials. Try again.</div>
 <%= form_tag '', :id => 'login-form' do %>
-<%= text_field_tag :email, nil, :id => 'email', :class => 'field' %>
+<%= text_field_tag :email, nil, :id => 'email', :class => 'field faded', :value => 'your@email.com' %>
 <%= password_field_tag :password, nil, :id => 'password', :class =>
-'field' %>
+'field faded', :value => 'password' %>
 <%= submit_tag 'log in', :id => 'login', :class => 'istok fright
 login-button' %>
 <%= submit_tag 'sign up', :id => 'signup', :class => 'istok fleft

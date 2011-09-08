@@ -18,9 +18,39 @@ OFMFS.Main = {
     showLogin:function(data){
 	if(data) this.mainContent.html(data);
 	this.showLogoutLink(false);
-	this.loginForm = $('form#login-form');
+        this.setupLoginForm();
 	$('input#login').click(this.logIn.bind(this));
 	$('input#signup').click(this.signUp.bind(this));
+    },
+
+    setupLoginForm:function(){
+        this.loginForm = $('form#login-form');
+        var defaultEmail = 'your@email.com', 
+        defaultPass = 'password',
+        emailField = $('form#login-form input#email'),
+        passField = $('form#login-form input#password');
+        emailField.val(defaultEmail);
+        passField.val(defaultPass);
+        $.each([{'field':emailField, 'default':defaultEmail}, 
+                {'field':passField, 'default':defaultPass}], function(){
+                    this['field'].focus(function(event){
+                        $('div#login-fail').fadeOut();
+                        var field = $(event.target);
+                        var val = field.val();
+                        if (val == this['default']){
+                            field.removeClass('faded');
+                            $(event.target).val('');
+                        }
+                    }.bind(this));
+                    this['field'].blur(function(event){
+                        var field = $(event.target);
+                        var val = field.val();
+                        if (val == ''){
+                            field.addClass('faded');
+                            $(event.target).val(this['default']);
+                        }
+                    }.bind(this));
+                });
     },
 
     logIn:function(event){
@@ -28,6 +58,10 @@ OFMFS.Main = {
     },
 
     showHome:function(data){
+        if (data == 'fail'){
+            $('div#login-fail').fadeIn();
+            return;
+        }
 	if(data) this.mainContent.html(data);
 	this.showLogoutLink();
 	this.showSearch();

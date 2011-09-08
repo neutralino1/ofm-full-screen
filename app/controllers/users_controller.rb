@@ -22,8 +22,7 @@ class UsersController < ApplicationController
       setup_for_pages
       render 'pages/index', :layout => false
     else
-      flash.now[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
-      render 'start/home'
+      render :text => 'fail'
     end
   end
 

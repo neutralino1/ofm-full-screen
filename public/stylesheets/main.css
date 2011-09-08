@@ -16,6 +16,10 @@ input {
     border:1px solid #D1D2D3;
 }
 
+input.faded {
+    color:#a1a2a3;
+}
+
 div#header {
     width:100%;
     background-color:#313233;
@@ -86,12 +90,22 @@ div#main-content a{
 }
 
 div#login-box {
+    position:relative;
     width:300px;
     margin:250px auto;
 }
 
 div#login-box .field{
-    width:100%;
+    width:278px;
+    padding:10px;
+    margin-bottom:10px;
+}
+
+div#login-fail {
+    position:absolute;
+    bottom:45px;
+    left:68px;
+    width:159px;
 }
 
 input.login-button, input#submit-search{

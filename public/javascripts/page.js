@@ -171,7 +171,7 @@ OFMFS.Page = {
     },
     
     setupDraggable:function(){
-	this.title.draggable(event,{
+	this.title.draggable({
 	    stop:function(){
 		this.titleTooltips.removeClass('faded');
 		var pos = this.title.position();
